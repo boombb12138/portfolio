@@ -49,7 +49,7 @@ export const Home = () => {
       { rootMargin: '0px 0px -10% 0px', threshold: 0.1 }
     );
 
-    // mark 滚轮滑动一定的距离鼠标就不见
+    // mark IntersectionObserver  滚轮滑动一定的距离鼠标就不见
     // IntersectionObserver用于检测intro与整个html的交叉状态
     const indicatorObserver = new IntersectionObserver(
       ([entry]) => {

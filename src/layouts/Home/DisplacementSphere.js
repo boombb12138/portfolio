@@ -88,7 +88,7 @@ export const DisplacementSphere = props => {
       shader.fragmentShader = fragShader;
     };
 
-    //startTransition可以延迟更新，做渐进式渲染，确保浏览器可以更快响应用户交互
+    //mark startTransition可以延迟更新，做渐进式渲染，确保浏览器可以更快响应用户交互
     startTransition(() => {
       geometry.current = new SphereBufferGeometry(32, 128, 128);
       sphere.current = new Mesh(geometry.current, material.current);

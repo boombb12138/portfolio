@@ -487,7 +487,7 @@ const Device = ({
           gltf.scene.position.set(...targetPosition.toArray());
           frameNode.rotation.set(...startRotation.toArray());
 
-          // animate用于在动画过渡中改变属性的值
+          //mark  animate用于在动画过渡中改变属性的值
           // 这里它会在startRotation.x 和 endRotation.x之间过渡
           return animate(startRotation.x, endRotation.x, {
             type: 'spring', //动画类型为弹簧
