@@ -14,7 +14,9 @@ import { Fragment, useEffect, useState } from 'react';
 import { cssProps } from 'utils/style';
 import styles from './Intro.module.css';
 
+// dynamic动态导入，可以运行时根据需要导入
 const DisplacementSphere = dynamic(() =>
+  // 导入DisplacementSphere模块并返回该模块中的DisplacementSphere
   import('layouts/Home/DisplacementSphere').then(mod => mod.DisplacementSphere)
 );
 
@@ -22,6 +24,9 @@ export function Intro({ id, sectionRef, disciplines, scrollIndicatorHidden, ...r
   const theme = useTheme();
   const [disciplineIndex, setDisciplineIndex] = useState(0);
   const prevTheme = usePrevious(theme);
+  // disciplines.slice(0, -1)获取除了最后一个元素的所有元素
+  //[disciplines.slice(0, -1).join(', '), disciplines.slice(-1)[0]]
+  // 就是 ['Developer, Web3er', 'Animator']
   const introLabel = [disciplines.slice(0, -1).join(', '), disciplines.slice(-1)[0]].join(
     ', and '
   );
@@ -29,6 +34,9 @@ export function Intro({ id, sectionRef, disciplines, scrollIndicatorHidden, ...r
   const titleId = `${id}-title`;
   const scrollToHash = useScrollToHash();
 
+  // 理解为setInterval回调就好
+  // setInterval会在每个指定时间间隔后触发回调，会重复执行回调函数
+  // setTimeout在达到指定延迟时间后只触发一次回调就消除定时器
   useInterval(
     () => {
       const index = (disciplineIndex + 1) % disciplines.length;
@@ -62,10 +70,11 @@ export function Intro({ id, sectionRef, disciplines, scrollIndicatorHidden, ...r
       <Transition in key={theme.themeId} timeout={3000}>
         {(visible, status) => (
           <Fragment>
+            {/* //mark 花在这里 */}
             <DisplacementSphere />
             <header className={styles.text}>
               <h1 className={styles.name} data-visible={visible} id={titleId}>
-                <DecoderText text="Hamish Williams" delay={300} />
+                <DecoderText text="Li Naomi" delay={300} />
               </h1>
               <Heading level={0} as="h2" className={styles.title}>
                 <VisuallyHidden className={styles.label}>
@@ -77,11 +86,12 @@ export function Intro({ id, sectionRef, disciplines, scrollIndicatorHidden, ...r
                     data-status={status}
                     style={cssProps({ delay: tokens.base.durationXS })}
                   >
-                    Designer
+                    Developer
                   </span>
                   <span className={styles.line} data-status={status} />
                 </span>
                 <div className={styles.row} component="span">
+                  {/* //mark 变化的字在这里 */}
                   <AnimatePresence>
                     {disciplines.map(item => (
                       <Transition

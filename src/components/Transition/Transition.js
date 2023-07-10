@@ -27,6 +27,8 @@ export const Transition = ({
   }, [show]);
 
   return (
+    // AnimatePresence的作用是在组件进入或离开DOM时，通过添加动画效果来增强过渡的可视化效果
+    // 它通过检测子组件的存在性（presence）来触发不同的动画效果
     <AnimatePresence>
       {(show || !unmount) && (
         <TransitionContent
@@ -58,6 +60,8 @@ const TransitionContent = ({
   show,
 }) => {
   const [status, setStatus] = useState('exited');
+  // isPresent表示元素当前是否存在于DOM中
+  // safeToRemove用于在元素离开，动画完成后执行的回调
   const [isPresent, safeToRemove] = usePresence();
   const [hasEntered, setHasEntered] = useState(false);
   const splitTimeout = typeof timeout === 'object';

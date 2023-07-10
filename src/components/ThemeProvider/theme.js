@@ -1,5 +1,6 @@
 import { pxToRem } from 'utils/style';
 
+// mark color defined in here
 // Full list of tokens
 const baseTokens = {
   rgbBlack: '0 0 0',
@@ -106,13 +107,15 @@ const tokensMobileSmall = {
   fontSizeH4: pxToRem(20),
 };
 
+// 靛蓝  0 229 255
 // Tokens that change based on theme
 const dark = {
   themeId: 'dark',
   rgbBackground: '17 17 17',
-  rgbBackgroundLight: '26 26 26',
-  rgbPrimary: '0 229 255',
-  rgbAccent: '0 229 255',
+  // EF4490  26 26 26
+  rgbBackgroundLight: '#EF4490',
+  rgbPrimary: '239 68 144',
+  rgbAccent: '239 68 144',
   rgbText: '255 255 255',
   rgbError: '255 55 102',
   colorTextTitle: 'rgb(var(--rgbText) / 1)',
@@ -124,8 +127,9 @@ const light = {
   themeId: 'light',
   rgbBackground: '242 242 242',
   rgbBackgroundLight: '255 255 255',
-  rgbPrimary: '0 0 0',
-  rgbAccent: '0 229 255',
+  // rgbPrimary: '0 0 0',
+  rgbPrimary: '239 68 144',
+  rgbAccent: '239 68 144',
   rgbText: '0 0 0',
   rgbError: '255 0 60',
   colorTextTitle: 'rgb(var(--rgbText) / 1)',

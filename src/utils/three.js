@@ -22,7 +22,7 @@ export const cleanScene = scene => {
   scene?.traverse(object => {
     if (!object.isMesh) return;
 
-    object.geometry.dispose();
+    object.geometry.dispose(); //dispose用于释放对象所占内存，清除每个Mesh对象中的几何体
 
     if (object.material.isMaterial) {
       cleanMaterial(object.material);
@@ -42,8 +42,9 @@ export const cleanMaterial = material => {
 
   for (const key of Object.keys(material)) {
     const value = material[key];
+    // 检查当前属性值 value 是否存在、是否为对象类型，并且是否具有 minFilter 属性。
     if (value && typeof value === 'object' && 'minFilter' in value) {
-      value.dispose();
+      value.dispose(); //释放当前属性值 value 对象占用的内存和资源。
 
       // Close GLTF bitmap textures
       value.source?.data?.close?.();
@@ -64,7 +65,7 @@ export const cleanRenderer = renderer => {
  */
 export const removeLights = lights => {
   for (const light of lights) {
-    light.parent.remove(light);
+    light.parent.remove(light); //将光源light从其父级移除
   }
 };
 

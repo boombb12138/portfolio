@@ -33,7 +33,7 @@ const ArticlesPost = ({
   useEffect(() => {
     setDateTime(formatDate(date));
   }, [date, dateTime]);
-  
+
   const handleMouseEnter = () => {
     setHovered(true);
   };
@@ -53,6 +53,7 @@ const ArticlesPost = ({
           Featured
         </Text>
       )}
+      {/* article background */}
       {featured && !!banner && (
         <div className={styles.postImage}>
           <Image

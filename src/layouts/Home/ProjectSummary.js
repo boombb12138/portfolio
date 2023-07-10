@@ -50,6 +50,7 @@ export const ProjectSummary = ({
       className={styles.svg}
       data-device={device}
     >
+      {/* use标签可以在SVG中多次引用相同的符号，它通过href属性指定要引用的文件 */}
       <use href={`${projectKatakana}#katakana-project`} />
     </svg>
   );
@@ -113,6 +114,7 @@ export const ProjectSummary = ({
       )}
       {model.type === 'phone' && (
         <>
+          {/* renderKatakana //mark 日文 项目修改 */}
           {renderKatakana('phone', visible)}
           <div className={styles.model} data-device="phone">
             <Model

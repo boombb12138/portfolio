@@ -13,6 +13,7 @@ import styles from './Navbar.module.css';
 import { ThemeToggle } from './ThemeToggle';
 import { navLinks, socialLinks } from './navData';
 
+// mark 左侧导航栏
 export const Navbar = () => {
   const [current, setCurrent] = useState();
   const [target, setTarget] = useState();
@@ -145,7 +146,7 @@ export const Navbar = () => {
         <a
           data-navbar-item
           className={styles.logo}
-          aria-label="Hamish Williams, Designer"
+          aria-label="Naomi, Designer"
           onClick={handleMobileNavClick}
         >
           <Monogram highlight />

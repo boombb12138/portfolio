@@ -1,15 +1,18 @@
-import gamestackTexture2Large from 'assets/gamestack-list-large.jpg';
-import gamestackTexture2Placeholder from 'assets/gamestack-list-placeholder.jpg';
-import gamestackTexture2 from 'assets/gamestack-list.jpg';
-import gamestackTextureLarge from 'assets/gamestack-login-large.jpg';
-import gamestackTexturePlaceholder from 'assets/gamestack-login-placeholder.jpg';
-import gamestackTexture from 'assets/gamestack-login.jpg';
-import sliceTextureLarge from 'assets/slice-app-large.jpg';
-import sliceTexturePlaceholder from 'assets/slice-app-placeholder.jpg';
-import sliceTexture from 'assets/slice-app.jpg';
-import sprTextureLarge from 'assets/spr-lesson-builder-dark-large.jpg';
-import sprTexturePlaceholder from 'assets/spr-lesson-builder-dark-placeholder.jpg';
-import sprTexture from 'assets/spr-lesson-builder-dark.jpg';
+// import gamestackTexture2Large from 'assets/gamestack-list-large.jpg';
+// import gamestackTexture2Placeholder from 'assets/gamestack-list-placeholder.jpg';
+import daoBackgroundDetail from 'assets/8dao-background-detail.png';
+// import gamestackTextureLarge from 'assets/gamestack-login-large.jpg';
+// import gamestackTexturePlaceholder from 'assets/8dao-background.png';
+import daoBackground from 'assets/8dao-background.png';
+// import sliceTextureLarge from 'assets/slice-app-large.jpg';
+import sliceTextureLarge from 'assets/fre-art-background.png';
+// import sliceTexturePlaceholder from 'assets/slice-app-placeholder.jpg';
+import sliceTexturePlaceholder from 'assets/fre-art-background.png';
+// import sliceTexture from 'assets/slice-app.jpg';
+import sliceTexture from 'assets/fre-art-background.png';
+import sprTextureLarge from 'assets/floating-diamond.png';
+import sprTexturePlaceholder from 'assets/floating-diamond.png';
+import sprTexture from 'assets/floating-diamond.png';
 import { Footer } from 'components/Footer';
 import { Meta } from 'components/Meta';
 import { Intro } from 'layouts/Home/Intro';
@@ -18,7 +21,7 @@ import { ProjectSummary } from 'layouts/Home/ProjectSummary';
 import { useEffect, useRef, useState } from 'react';
 import styles from './Home.module.css';
 
-const disciplines = ['Developer', 'Prototyper', 'Animator', 'Illustrator', 'Modder'];
+const disciplines = ['Designer', 'Web3er', 'Animator'];
 
 export const Home = () => {
   const [visibleSections, setVisibleSections] = useState([]);
@@ -46,10 +49,16 @@ export const Home = () => {
       { rootMargin: '0px 0px -10% 0px', threshold: 0.1 }
     );
 
+    // mark 滚轮滑动一定的距离鼠标就不见
+    // IntersectionObserver用于检测intro与整个html的交叉状态
     const indicatorObserver = new IntersectionObserver(
       ([entry]) => {
+        // entry.isIntersecting表示intro是否在视口内
         setScrollIndicatorHidden(!entry.isIntersecting);
       },
+      // -100%表示目标元素在进入视口之前需要有100%的偏移量 换句话说
+      //intro的顶部边界需要超过视口顶部边界的100%的高度 才被视为进入视口
+      // 才会触发回调
       { rootMargin: '-100% 0px 0px 0px' }
     );
 
@@ -57,6 +66,7 @@ export const Home = () => {
       sectionObserver.observe(section.current);
     });
 
+    // intro就是要观察的元素
     indicatorObserver.observe(intro.current);
 
     return () => {
@@ -67,9 +77,11 @@ export const Home = () => {
 
   return (
     <div className={styles.home}>
+      {/* //mark Home main content */}
       <Meta
         title="Designer + Developer"
-        description="Design portfolio of Hamish Williams — a product designer working on web & mobile
+        ogImage="../../public/favicon.png"
+        description="Design portfolio of Naomi — a programmer working on web & mobile
           apps with a focus on motion, experience design, and accessibility."
       />
       <Intro
@@ -78,22 +90,23 @@ export const Home = () => {
         disciplines={disciplines}
         scrollIndicatorHidden={scrollIndicatorHidden}
       />
+      {/* //mark modify projects in here */}
       <ProjectSummary
         id="project-1"
         sectionRef={projectOne}
         visible={visibleSections.includes(projectOne.current)}
         index={1}
-        title="Designing the future of education"
-        description="Designing a platform to help educators build better online courseware"
+        title="FrenArt NFT collaboration"
+        description="Charge the members in FrenArt DAO, an app for NFT and social"
         buttonText="View project"
-        buttonLink="/projects/smart-sparrow"
+        buttonLink="https://frenart-website-hck785lyw-lxdao.vercel.app/"
         model={{
           type: 'laptop',
-          alt: 'Smart Sparrow lesson builder',
+          alt: 'Annotating a image in the FrenArt app',
           textures: [
             {
-              srcSet: [sprTexture, sprTextureLarge],
-              placeholder: sprTexturePlaceholder,
+              srcSet: [sliceTexture, sliceTextureLarge],
+              placeholder: sliceTexturePlaceholder,
             },
           ],
         }}
@@ -104,41 +117,43 @@ export const Home = () => {
         sectionRef={projectTwo}
         visible={visibleSections.includes(projectTwo.current)}
         index={2}
-        title="Video game progress tracking"
-        description="Design and development for a video game tracking app built in React Native"
+        title="8DAO membership system"
+        description="Design and development for a DAO in React"
         buttonText="View website"
-        buttonLink="https://gamestack.hamishw.com"
+        buttonLink="https://8dao-website-preview.vercel.app/"
         model={{
           type: 'phone',
           alt: 'App login screen',
           textures: [
             {
-              srcSet: [gamestackTexture, gamestackTextureLarge],
-              placeholder: gamestackTexturePlaceholder,
+              srcSet: [daoBackground],
+              placeholder: daoBackgroundDetail,
             },
             {
-              srcSet: [gamestackTexture2, gamestackTexture2Large],
-              placeholder: gamestackTexture2Placeholder,
+              srcSet: [daoBackgroundDetail],
+              placeholder: daoBackgroundDetail,
             },
           ],
         }}
       />
+      {/* //mark project config here */}
       <ProjectSummary
         id="project-3"
         sectionRef={projectThree}
         visible={visibleSections.includes(projectThree.current)}
         index={3}
-        title="Biomedical image collaboration"
-        description="Increasing the amount of collaboration in Slice, an app for biomedical imaging"
+        title="Three.js Showreel"
+        description="Projects made with three.js, r3f, drei and gsap"
         buttonText="View project"
-        buttonLink="/projects/slice"
+        buttonLink="https://www.capcut.cn/share/7225616662869939489?t=1&id=7225628904520733985"
         model={{
           type: 'laptop',
-          alt: 'Annotating a biomedical image in the Slice app',
+          alt: 'Three.js Showreel',
           textures: [
             {
-              srcSet: [sliceTexture, sliceTextureLarge],
-              placeholder: sliceTexturePlaceholder,
+              // srcSet是屏幕显示的内容
+              srcSet: [sprTexture, sprTextureLarge],
+              placeholder: sprTexturePlaceholder,
             },
           ],
         }}

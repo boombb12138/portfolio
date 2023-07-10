@@ -21,6 +21,7 @@ export const ThemeProvider = ({
   as: Component = 'div',
   ...rest
 }) => {
+  console.log('...theme[themeId], ...themeOverrides ', theme[themeId], themeOverrides);
   const currentTheme = { ...theme[themeId], ...themeOverrides };
   const parentTheme = useTheme();
   const isRootProvider = !parentTheme.themeId;

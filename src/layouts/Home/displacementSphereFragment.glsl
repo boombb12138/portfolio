@@ -9,6 +9,7 @@ uniform float opacity;
 uniform float time;
 varying vec2 vUv;
 varying vec3 newPosition;
+varying vec3 vColor;
 varying float noise;
 
 #include <common>
@@ -41,9 +42,12 @@ varying float noise;
 void main() {
 	#include <clipping_planes_fragment>
 
-  vec3 color = vec3(vUv * (0.2 - 2.0 * noise), 1.0);
-  vec3 finalColors = vec3(color.b * 1.5, color.r, color.r);
+  vec3 color = vec3(vUv * (0.2 - 2.0* noise), 0.07);
+  vec3 finalColors = vec3(color.b*1.2, color.g*1.5, color.g*1.2);
+//   vec3 finalColors = vec3(color.b * 1.5, color.r, color.r);
+// noise can make color diffuse
   vec4 diffuseColor = vec4(cos(finalColors * noise * 3.0), 1.0);
+//   xiugai vec3
   ReflectedLight reflectedLight = ReflectedLight(vec3(0.0), vec3(0.0), vec3(0.0), vec3(0.0));
   vec3 totalEmissiveRadiance = emissive;
 
@@ -62,7 +66,8 @@ void main() {
 	#include <lights_fragment_end>
 	#include <aomap_fragment>
 
-	vec3 outgoingLight = reflectedLight.directDiffuse + reflectedLight.indirectDiffuse + reflectedLight.directSpecular + reflectedLight.indirectSpecular + totalEmissiveRadiance;
+// direct/indirect light and specular will effect the outgooingLight
+	vec3 outgoingLight = reflectedLight.directDiffuse + reflectedLight.indirectDiffuse + reflectedLight.directSpecular + reflectedLight.indirectSpecular +totalEmissiveRadiance;//totalEmissiveRadiance
   
 	#include <envmap_fragment>
 	#include <output_fragment>
@@ -72,5 +77,7 @@ void main() {
 	#include <premultiplied_alpha_fragment>
 	#include <dithering_fragment>
 
+//the outgooingLight determined the gl_FragColor's rgb 
+// diffuseColor.a determined the gl_FragColor's opacity
   gl_FragColor = vec4(outgoingLight, diffuseColor.a);
 }

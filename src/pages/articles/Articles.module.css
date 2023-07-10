@@ -7,7 +7,8 @@
   grid-template-rows: 1fr auto;
   min-height: 100%;
 
-  @media (--singleColumnWidth), (--mediaMobileLS) {
+  @media (--singleColumnWidth),
+  (--mediaMobileLS) {
     overflow-x: hidden;
   }
 }
@@ -38,12 +39,14 @@
     padding-bottom: var(--space3XL);
   }
 
-  @media (--singleColumnWidth), (--mediaMobileLS) {
+  @media (--singleColumnWidth),
+  (--mediaMobileLS) {
     padding-right: 0;
     grid-template-columns: 100%;
   }
 
-  @media (--mediaMobile), (--mediaMobileLS) {
+  @media (--mediaMobile),
+  (--mediaMobileLS) {
     gap: var(--space2XL);
     padding-bottom: var(--spaceXL);
     padding-top: var(--mobileNavOffset);
@@ -86,7 +89,7 @@
   filter: grayscale(1);
   pointer-events: none;
 
-  & > * {
+  &>* {
     opacity: 0.3;
   }
 }
@@ -120,7 +123,8 @@
     --featuredPostPadding: var(--spaceXL);
   }
 
-  @media (--mediaMobile), (--mediaMobileLS) {
+  @media (--mediaMobile),
+  (--mediaMobileLS) {
     --featuredPostPadding: var(--spaceOuter);
   }
 
@@ -289,10 +293,13 @@
 
 .postImage {
   position: absolute;
+  /* 将元素覆盖父盒子的整个区域 */
   inset: 0;
   display: grid;
+  /* 元素会被拉伸到填满grid */
   place-content: stretch;
   overflow: hidden;
+  /* 创建新的上下文，将元素与其父元素和兄弟元素隔开 */
   isolation: isolate;
   clip-path: var(--featuredPostClip);
   opacity: 0;
@@ -301,16 +308,16 @@
     animation: fadeIn 1s var(--bezierFastoutSlowin) forwards 0.9s;
   }
 
+  /* 在postImage元素后创建一个元素 这个元素会覆盖整个postImage */
   &::after {
     content: '';
     position: absolute;
     inset: 0;
-    background-image: linear-gradient(
-      -135deg,
-      rgb(var(--rgbBackgroundLight) / 0.5) 0%,
-      rgb(var(--rgbBackgroundLight) / 0.86) 60%,
-      rgb(var(--rgbBackgroundLight) / 0.9) 100%
-    );
+    /* 背景是线性渐变 */
+    background-image: linear-gradient(-135deg,
+        rgb(var(--rgbBackgroundLight) / 0.5) 0%,
+        rgb(var(--rgbBackgroundLight) / 0.86) 60%,
+        rgb(var(--rgbBackgroundLight) / 0.9) 100%);
   }
 
   @media (--mediaUseMotion) {

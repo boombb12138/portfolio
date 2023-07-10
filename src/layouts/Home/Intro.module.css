@@ -134,10 +134,16 @@
   line-height: 1;
   animation-duration: 1.5s;
   animation-delay: var(--delay);
+  /*forwards： 在动画播放完毕后，元素将保持在动画的最后一个关键帧状态，而不会回到初始状态 */
   animation-fill-mode: forwards;
+  /* 动画将按照自定义的时间曲线来控制其速度变化
+ --bezierFastoutSlowin 动画的时间曲线
+  */
   animation-timing-function: var(--bezierFastoutSlowin);
+  /* rgbText是自定义的CSS变量 */
   color: rgb(var(--rgbText) / 0);
   transition: opacity 0.5s ease var(--durationM);
+  /* 用于创建一个新的层叠上下文并将元素隔离在其自己的层叠上下文s */
   isolation: isolate;
 
   &::after {
@@ -148,15 +154,18 @@
     animation-fill-mode: forwards;
     animation-timing-function: var(--bezierFastoutSlowin);
     transform-origin: left;
+    /* 使得元素在x轴上消失 */
     transform: scale3d(0, 1, 1);
     position: absolute;
     inset: 0 -0.02em 0 0;
     z-index: var(--zIndex1);
+    /* will-change做性能优化 告诉浏览器该元素将要发生变化的类型 */
     will-change: transform;
   }
 
+  /* 具有 data-plus 属性值为 true 的元素的伪元素 ::before。 */
   &[data-plus='true']::before {
-    content: '+';
+    content: '&';
     margin-right: 10px;
     opacity: 0.4;
   }
@@ -164,6 +173,9 @@
   &[data-status='entering'] {
     animation-name: introTextReveal;
 
+    /* 在data-status属性值为entering而且启用了运动特性的元素上
+    会应用reveal动画到after伪元素
+    */
     @media (--mediaUseMotion) {
       &::after:global {
         animation-name: reveal;
@@ -177,6 +189,7 @@
     &::after {
       opacity: 1;
       transform: scale3d(0, 0, 1);
+      /* trans设置元素变换的原点位置 */
       transform-origin: right;
     }
   }
@@ -263,6 +276,7 @@
   transition-timing-function: ease;
   opacity: 0;
 
+  /*//mark 鼠标 中间的小竖条 */
   &::before {
     content: '';
     height: 7px;
@@ -275,7 +289,9 @@
     transform: translateX(-1px);
   }
 
+  /* 满足 --mediaUseMotion条件时 应用样式*/
   @media (--mediaUseMotion) {
+    /* 过渡效果应用到 */
     transition-property: opacity, transform;
 
     &::before {
@@ -287,6 +303,7 @@
     opacity: 1;
   }
 
+  /* data-hidden为true就隐藏鼠标 */
   &[data-hidden='true'] {
     opacity: 0;
 

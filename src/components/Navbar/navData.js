@@ -11,26 +11,27 @@ export const navLinks = [
     label: 'Articles',
     pathname: '/articles',
   },
-  {
-    label: 'Contact',
-    pathname: '/contact',
-  },
+  // mark hide contact
+  // {
+  //   label: 'Contact',
+  //   pathname: '/contact',
+  // },
 ];
 
 export const socialLinks = [
   {
     label: 'Twitter',
-    url: 'https://twitter.com/hamishMW',
+    url: 'https://twitter.com/boombb12138',
     icon: 'twitter',
   },
-  {
-    label: 'Figma',
-    url: 'https://www.figma.com/@Hamish',
-    icon: 'figma',
-  },
+  // {
+  //   label: 'Figma',
+  //   url: 'https://www.figma.com/@boombb12138',
+  //   icon: 'figma',
+  // },
   {
     label: 'Github',
-    url: 'https://github.com/HamishMW',
+    url: 'https://github.com/boombb12138',
     icon: 'github',
   },
 ];

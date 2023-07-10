@@ -18,7 +18,8 @@
     --headerNavFontSize: calc((22 / 16) * 1rem);
   }
 
-  @media (--mediaMobile), (--mediaMobileLS) {
+  @media (--mediaMobile),
+  (--mediaMobileLS) {
     bottom: auto;
   }
 }
@@ -42,14 +43,18 @@
   flex: 1 1 auto;
   max-width: var(--space2XL);
 
-  @media (--mediaMobile), (--mediaMobileLS) {
+  @media (--mediaMobile),
+  (--mediaMobileLS) {
     display: none;
   }
 }
 
+/* //mark 左侧蓝色的杠是怎么做的 */
 .navList {
+  /* ，将元素按逆时针方向旋转 90 度 再往左走 */
   transform: rotate(-90deg) translate3d(-50%, 0, 0);
   display: flex;
+  /* 调整目录标题的顺序 */
   flex-direction: row-reverse;
   position: relative;
   top: calc(var(--spaceM) * -1);
@@ -62,6 +67,7 @@
   font-size: var(--headerNavFontSize);
   text-decoration: none;
   position: relative;
+  /* 定义元素在颜色变化过渡时的动画效果。 var(--durationS)过渡持续时间*/
   transition: color var(--durationS) ease 0.1s;
   line-height: 1;
   display: inline-flex;
@@ -81,6 +87,7 @@
     left: var(--spaceS);
     height: 4px;
     background: rgb(var(--rgbAccent));
+    /* 默认划线是不存在的 */
     transform: scaleX(0);
     transform-origin: right;
   }
@@ -95,6 +102,7 @@
   &:active::after,
   &:focus::after,
   &[aria-current='page']::after {
+    /* 当鼠标悬停 点击时 标题显示出来*/
     transform: scaleX(1);
     transform-origin: left;
   }
@@ -108,7 +116,8 @@
   position: relative;
   z-index: var(--zIndex2);
 
-  @media (--mediaMobile), (--mediaMobileLS) {
+  @media (--mediaMobile),
+  (--mediaMobileLS) {
     flex-direction: row;
     position: absolute;
     bottom: var(--spaceXL);
@@ -160,7 +169,8 @@
   justify-content: center;
   backdrop-filter: blur(16px);
 
-  @media (--mediaMobile), (--mediaMobileLS) {
+  @media (--mediaMobile),
+  (--mediaMobileLS) {
     display: flex;
   }
 
@@ -198,7 +208,8 @@
     top: auto;
   }
 
-  @media (--mediaMobileS), (max-height: 360px) {
+  @media (--mediaMobileS),
+  (max-height: 360px) {
     --headerNavFontSize: calc((18 / 16) * 1rem);
   }
 

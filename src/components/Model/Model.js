@@ -83,6 +83,9 @@ export const Model = ({
   const fillPlane = useRef();
   const isInViewport = useInViewport(container, false, { threshold: 0.2 });
   const reduceMotion = useReducedMotion();
+  // rotationX 是一个可动画的状态，
+  // 它将根据后续的代码和交互操作而发生变化，
+  // 并且可以在组件渲染时自动应用相应的动画效果。
   const rotationX = useSpring(0, rotationSpringConfig);
   const rotationY = useSpring(0, rotationSpringConfig);
 
@@ -288,6 +291,7 @@ export const Model = ({
       const position = {
         x: (event.clientX - innerWidth / 2) / innerWidth,
         y: (event.clientY - innerHeight / 2) / innerHeight,
+        // x 会是一半的innerWidth
       };
 
       rotationY.set(position.x / 2);
@@ -308,8 +312,10 @@ export const Model = ({
     const handleResize = () => {
       if (!container.current) return;
 
+      // container是canvas外层div
       const { clientWidth, clientHeight } = container.current;
 
+      // 重新设置renderer的大小和相机的角度 更新相机阵列
       renderer.current.setSize(clientWidth, clientHeight);
       camera.current.aspect = clientWidth / clientHeight;
       camera.current.updateProjectionMatrix();
@@ -336,6 +342,7 @@ export const Model = ({
       {...rest}
     >
       <canvas className={styles.canvas} ref={canvas} />
+      {/* 模型 */}
       {models.map((model, index) => (
         <Device
           key={JSON.stringify(model.position)}
@@ -364,8 +371,8 @@ const Device = ({
   show,
 }) => {
   const [loadDevice, setLoadDevice] = useState();
-  const reduceMotion = useReducedMotion();
-  const placeholderScreen = createRef();
+  const reduceMotion = useReducedMotion(); //检查用户系统是否禁用动画
+  const placeholderScreen = createRef(); //用于获取组件
 
   useEffect(() => {
     const applyScreenTexture = async (texture, node) => {
@@ -388,6 +395,7 @@ const Device = ({
       let loadFullResTexture;
       let playAnimation;
 
+      // 异步加载模型和材质
       const [placeholder, gltf] = await Promise.all([
         await textureLoader.loadAsync(texture.placeholder.src),
         await modelLoader.loadAsync(url),
@@ -398,8 +406,11 @@ const Device = ({
       gltf.scene.traverse(async node => {
         if (node.material) {
           node.material.color = new Color(0x1f2025);
+          // 将颜色值从sRGB色彩空间转换为线性空间,可以在进行光照计算时获得更准确的结果
           node.material.color.convertSRGBToLinear();
         }
+
+        // 如果节点是Screen
 
         if (node.name === MeshType.Screen) {
           // Create a copy of the screen mesh so we can fade it out
@@ -427,6 +438,7 @@ const Device = ({
         }
       });
 
+      // targetPosition ={0,0,0}
       const targetPosition = new Vector3(position.x, position.y, position.z);
 
       if (reduceMotion) {
@@ -466,21 +478,28 @@ const Device = ({
           const frameNode = gltf.scene.children.find(
             node => node.name === MeshType.Frame
           );
+
+          // MathUtils.degToRad(90)将角度换为弧度
+          // startRotation绕x轴旋转90度（约π/2弧度），而在y轴和z轴上没有旋
           const startRotation = new Vector3(MathUtils.degToRad(90), 0, 0);
           const endRotation = new Vector3(0, 0, 0);
 
           gltf.scene.position.set(...targetPosition.toArray());
           frameNode.rotation.set(...startRotation.toArray());
 
+          // animate用于在动画过渡中改变属性的值
+          // 这里它会在startRotation.x 和 endRotation.x之间过渡
           return animate(startRotation.x, endRotation.x, {
-            type: 'spring',
+            type: 'spring', //动画类型为弹簧
             delay: (300 * index + showDelay + 300) / 1000,
+            //  动画刚度 阻尼 速度
             stiffness: 80,
             damping: 20,
             restSpeed: 0.0001,
             restDelta: 0.0001,
+            // 在动画过程中每次属性值发生变化时调用
             onUpdate: value => {
-              frameNode.rotation.x = value;
+              frameNode.rotation.x = value; //frameNode的旋转角度从startRotation.x到 endRotation.x
               renderFrame();
             },
           });
