@@ -14,7 +14,7 @@ import RouterLink from 'next/link';
 import { useState, useEffect } from 'react';
 import { formatDate } from 'utils/date';
 import { classes, cssProps } from 'utils/style';
-import styles from './Articles.module.css';
+import styles from '../../styles/Articles.module.css';
 
 const ArticlesPost = ({
   slug,
