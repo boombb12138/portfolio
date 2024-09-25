@@ -48,7 +48,7 @@ ${pages.map(addPage).filter(Boolean).join('\n')}
 ${posts.filter(Boolean).join('\n')}
 </urlset>\n`;
 
-  fs.writeFileSync('public/sitemap.xml', sitemap);
+  // fs.writeFileSync('public/sitemap.xml', sitemap);
 }
 
 generateSitemap();
