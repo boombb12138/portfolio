@@ -22,10 +22,10 @@ const ProfileText = ({ visible, titleId }) => (
     </Heading>
     <Text className={styles.description} data-visible={visible} size="l" as="p">
       I’m Naomi, currently I live in Guangdong working as a senior front end dev at{' '}
-      <Link href="https://lxdao.io/">LXDAO</Link>. My projects include UI design, front
-      end, and model. Being comfortable with code allows me to rapidly prototype and
-      validate experiences. If you’re interested in the tools and software I use check out
-      my <Link href="https://github.com/boombb12138 ">github page</Link>.
+      HongKong University Fintech Lab. My projects include UI design, front end, and
+      model. Being comfortable with code allows me to rapidly prototype and validate
+      experiences. If you’re interested in the tools and software I use check out my{' '}
+      <Link href="https://github.com/boombb12138 ">github page</Link>.
     </Text>
     <Text className={styles.description} data-visible={visible} size="l" as="p">
       In my spare time I like meditation, praying, drawing and cooking. I’m always down
