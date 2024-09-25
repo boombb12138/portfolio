@@ -11,7 +11,7 @@ import rehypeSlug from 'rehype-slug';
 import { POSTS_PATH, postFilePaths } from 'utils/mdx';
 import { formatTimecode } from 'utils/timecode';
 import rehypePrism from '@mapbox/rehype-prism';
-import { generateOgImage } from '../../styles/og-image.css';
+import { generateOgImage } from './og-image.js';
 
 export default function PostPage({ frontmatter, code, timecode, ogImage }) {
   const MDXComponent = useMemo(() => getMDXComponent(code), [code]);
