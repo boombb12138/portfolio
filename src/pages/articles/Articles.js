@@ -178,13 +178,20 @@ export const Articles = ({ posts, featured }) => {
         title="Articles"
         description="A collection of technical design and development articles. May contain incoherent ramblings."
       />
+
       <Section className={styles.content}>
-        {!isSingleColumn && (
+        <a
+          href="https://juejin.cn/user/2107109724924174/posts"
+          style={{ textDecoration: 'none', color: 'inherit' }}
+        >
+          https://juejin.cn/user/2107109724924174/posts
+        </a>
+        {/* {!isSingleColumn && (
           <div className={styles.grid}>
             {postList}
             {featuredPost}
           </div>
-        )}
+        )} */}
         {isSingleColumn && (
           <div className={styles.grid}>
             {postsHeader}
