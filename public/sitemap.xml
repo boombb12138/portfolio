@@ -3,10 +3,10 @@
     <loc>https://hamishw.com/</loc>
     <changefreq>monthly</changefreq>
   </url>
-  <url>
+  <!-- <url>
     <loc>https://hamishw.com/articles/</loc>
     <changefreq>monthly</changefreq>
-  </url>
+  </url> -->
   <url>
     <loc>https://hamishw.com/contact/</loc>
     <changefreq>monthly</changefreq>
