@@ -1,6 +1,14 @@
+const isProd = process.env.NODE_ENV === 'production';
+
 module.exports = {
   reactStrictMode: true,
-  // trailingSlash: true,
+  trailingSlash: true,
+  images: {
+    unoptimized: true,
+  },
+  output: 'export',
+  basePath: isProd ? '/portfolio' : '',
+  assetPrefix: isProd ? '/portfolio/' : '',
   pageExtensions: ['page.js', 'api.js'],
   webpack(config, { isServer }) {
     // Run custom scripts
