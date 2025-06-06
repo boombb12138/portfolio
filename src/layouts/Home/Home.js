@@ -1,15 +1,8 @@
-// import gamestackTexture2Large from 'assets/gamestack-list-large.jpg';
-// import gamestackTexture2Placeholder from 'assets/gamestack-list-placeholder.jpg';
-import daoBackgroundDetail from 'assets/8dao-background-detail.png';
-// import gamestackTextureLarge from 'assets/gamestack-login-large.jpg';
-// import gamestackTexturePlaceholder from 'assets/8dao-background.png';
-import daoBackground from 'assets/8dao-background.png';
-// import sliceTextureLarge from 'assets/slice-app-large.jpg';
-import sliceTextureLarge from 'assets/fre-art-background.png';
-// import sliceTexturePlaceholder from 'assets/slice-app-placeholder.jpg';
-import sliceTexturePlaceholder from 'assets/fre-art-background.png';
-// import sliceTexture from 'assets/slice-app.jpg';
-import sliceTexture from 'assets/fre-art-background.png';
+import puffBackgroundDetail from 'assets/puff-background2.png';
+import puffBackground from 'assets/puff-background.png';
+import sliceTextureLarge from 'assets/novery-background.png';
+import sliceTexturePlaceholder from 'assets/novery-background.png';
+import sliceTexture from 'assets/novery-background.png';
 import sprTextureLarge from 'assets/floating-diamond.png';
 import sprTexturePlaceholder from 'assets/floating-diamond.png';
 import sprTexture from 'assets/floating-diamond.png';
@@ -21,7 +14,7 @@ import { ProjectSummary } from 'layouts/Home/ProjectSummary';
 import { useEffect, useRef, useState } from 'react';
 import styles from './Home.module.css';
 
-const disciplines = ['Designer', 'Web3er', 'Animator'];
+const disciplines = ['Designer', 'Writer', 'Animator'];
 
 export const Home = () => {
   const [visibleSections, setVisibleSections] = useState([]);
@@ -96,13 +89,13 @@ export const Home = () => {
         sectionRef={projectOne}
         visible={visibleSections.includes(projectOne.current)}
         index={1}
-        title="FrenArt NFT collaboration"
-        description="Charge the members in FrenArt DAO, an app for NFT and social"
-        buttonText="View project"
-        buttonLink="https://frenart-website-hck785lyw-lxdao.vercel.app/"
+        title="Novery"
+        description="Transform your notes into lasting memories"
+        buttonText="View website"
+        buttonLink="https://www.novery.ai/"
         model={{
           type: 'laptop',
-          alt: 'Annotating a image in the FrenArt app',
+          alt: '',
           textures: [
             {
               srcSet: [sliceTexture, sliceTextureLarge],
@@ -117,21 +110,21 @@ export const Home = () => {
         sectionRef={projectTwo}
         visible={visibleSections.includes(projectTwo.current)}
         index={2}
-        title="8DAO membership system"
-        description="Design and development for a DAO in React"
-        buttonText="View website"
-        buttonLink="https://8dao-website-preview.vercel.app/"
+        title="Prediction Market"
+        description="Predict, Participate, Profit! A blockchain-based prediction market."
+        buttonText="View project"
+        buttonLink="https://puffbet.io/"
         model={{
           type: 'phone',
-          alt: 'App login screen',
+          alt: 'A blockchain-based prediction market',
           textures: [
             {
-              srcSet: [daoBackground],
-              placeholder: daoBackgroundDetail,
+              srcSet: [puffBackground],
+              placeholder: puffBackground,
             },
             {
-              srcSet: [daoBackgroundDetail],
-              placeholder: daoBackgroundDetail,
+              srcSet: [puffBackgroundDetail],
+              placeholder: puffBackgroundDetail,
             },
           ],
         }}

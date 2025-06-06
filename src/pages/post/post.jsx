@@ -1,26 +1,25 @@
-import ArrowDown from 'assets/arrow-down.svg';
 import { Divider } from 'components/Divider';
 import { Footer } from 'components/Footer';
 import { Heading } from 'components/Heading';
 import { Image } from 'components/Image';
-import { Meta } from 'components/Meta';
 import { Section } from 'components/Section';
 import { Text } from 'components/Text';
 import { tokens } from 'components/ThemeProvider/theme';
 import { Transition } from 'components/Transition';
 import { useParallax, useScrollToHash } from 'hooks';
-import RouterLink from 'next/link';
 import { useRef, useState, useEffect } from 'react';
 import { clamp } from 'utils/clamp';
 import { formatDate } from 'utils/date';
 import { cssProps, msToNum, numToMs } from 'utils/style';
-import styles from './Post.module.css';
+import styles from './post.module.css';
+import Link from 'next/link';
 
-export const Post = ({ children, title, date, abstract, banner, timecode, ogImage }) => {
+const Post = ({ children, title, date, banner, timecode }) => {
   const scrollToHash = useScrollToHash();
   const imageRef = useRef();
   const [dateTime, setDateTime] = useState(null);
-  console.log('Post.js');
+
+  console.log('post.jsx');
 
   useEffect(() => {
     setDateTime(formatDate(date));
@@ -36,25 +35,21 @@ export const Post = ({ children, title, date, abstract, banner, timecode, ogImag
     scrollToHash(event.currentTarget.href);
   };
 
+  const placeholder = `${banner?.split('.')[0]}-placeholder.jpg`;
+
   return (
     <article className={styles.post}>
-      <Meta title={title} prefix="" description={abstract} ogImage={ogImage} />
       <Section>
         {banner && (
           <div className={styles.banner} ref={imageRef}>
             <div className={styles.bannerImage}>
-              <Image
-                role="presentation"
-                src={{ src: banner }}
-                placeholder={{ src: `${banner.split('.')[0]}-placeholder.jpg` }}
-                alt=""
-              />
+              <Image role="presentation" src={banner} placeholder={placeholder} alt="" />
             </div>
             <div className={styles.bannerImageBlur}>
               <Image
                 role="presentation"
-                src={{ src: `${banner.split('.')[0]}-placeholder.jpg` }}
-                placeholder={{ src: `${banner.split('.')[0]}-placeholder.jpg` }}
+                src={placeholder}
+                placeholder={placeholder}
                 alt=""
               />
             </div>
@@ -63,8 +58,8 @@ export const Post = ({ children, title, date, abstract, banner, timecode, ogImag
         <header className={styles.header}>
           <div className={styles.headerText}>
             <Transition in timeout={msToNum(tokens.base.durationM)}>
-              {visible => (
-                <div className={styles.date}>
+              {({ visible, nodeRef }) => (
+                <div className={styles.date} ref={nodeRef}>
                   <Divider notchWidth="64px" notchHeight="8px" collapsed={!visible} />
                   <Text className={styles.dateText} data-visible={visible}>
                     {dateTime}
@@ -73,12 +68,11 @@ export const Post = ({ children, title, date, abstract, banner, timecode, ogImag
               )}
             </Transition>
             <Heading level={2} as="h1" className={styles.title} aria-label={title}>
-              {title?.split(' ').map((word, index) => (
+              {title.split(' ').map((word, index) => (
                 <span className={styles.titleWordWrapper} key={`${word}-${index}`}>
                   <span
                     className={styles.titleWord}
                     style={cssProps({ delay: numToMs(index * 100 + 100) })}
-                    index={index}
                   >
                     {word}
                     {index !== title.split(' ').length - 1 ? ' ' : ''}
@@ -87,15 +81,22 @@ export const Post = ({ children, title, date, abstract, banner, timecode, ogImag
               ))}
             </Heading>
             <div className={styles.details}>
-              <RouterLink href="#postContent">
-                <a
-                  className={styles.arrow}
-                  aria-label="Scroll to post content"
-                  onClick={handleScrollIndicatorClick}
+              <Link
+                href="#postContent"
+                className={styles.arrow}
+                aria-label="Scroll to post content"
+                onClick={handleScrollIndicatorClick}
+              >
+                <svg
+                  aria-hidden
+                  stroke="currentColor"
+                  width="43"
+                  height="15"
+                  viewBox="0 0 43 15"
                 >
-                  <ArrowDown aria-hidden />
-                </a>
-              </RouterLink>
+                  <path d="M1 1l20.5 12L42 1" strokeWidth="2" fill="none" />
+                </svg>
+              </Link>
               <div className={styles.timecode}>{timecode}</div>
             </div>
           </div>
@@ -110,3 +111,5 @@ export const Post = ({ children, title, date, abstract, banner, timecode, ogImag
     </article>
   );
 };
+
+export default Post;
